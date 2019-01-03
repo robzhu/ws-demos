@@ -28,11 +28,21 @@ wss.on('connection', socket => {
             socket.send(`400: invalid request format`);
         }
     });
+
+    socket.on('close', (code, reason) => {
+        const connectionId = Object.keys(connections).find(key => connections[key] === socket);
+        clientDisconnected({connectionId});
+    });
 });
 
 function echo({connectionId, data}) {
     const connection = connections[connectionId];
     connection.send(data);
+}
+
+function clientDisconnected({connectionId}) {
+    delete connections[connectionId];
+    console.log(`removed socket with connectionId: ${connectionId}`);
 }
 
 console.log(`Listening on ws://localhost:${port}`);
