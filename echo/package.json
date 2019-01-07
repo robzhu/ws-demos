@@ -1,0 +1,6 @@
+{
+  "name": "echo",
+  "dependencies": {
+    "ws": "6.1.2"
+  }
+}
