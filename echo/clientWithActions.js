@@ -15,6 +15,6 @@ readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 }).on('line', data => {
-    const message = JSON.stringify({action: 'echo', data: input});
-    ws.send(data);
+    const message = JSON.stringify({action: 'echo', data});
+    ws.send(message);
 });
